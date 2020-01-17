@@ -27,5 +27,6 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr               \
       -Wno-dev -G Ninja ..
       
 ninja
+sudo ninja install
 
 
