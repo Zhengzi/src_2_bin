@@ -1,5 +1,7 @@
 This file records the steps to build the environments.
 
+#sudo apt install cmake
+#sudo apt install ninja-build 
 
 #ref# http://www.linuxfromscratch.org/blfs/view/cvs/general/llvm.html
 #Download (HTTP): https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz
@@ -25,3 +27,5 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr               \
       -Wno-dev -G Ninja ..
       
 ninja
+
+
