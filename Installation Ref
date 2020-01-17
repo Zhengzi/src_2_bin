@@ -1,0 +1,27 @@
+This file records the steps to build the environments.
+
+
+#ref# http://www.linuxfromscratch.org/blfs/view/cvs/general/llvm.html
+#Download (HTTP): https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz
+#Download: https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz
+
+tar -xf llvm-9.0.1.src.tar.xz -C llvm
+cd llvm
+tar -xf ../clang-9.0.1.src.tar.xz -C tools
+mv tools/clang-9.0.1.src tools/clang
+
+mkdir -v build
+cd       build
+
+CC=gcc CXX=g++                                  \
+cmake -DCMAKE_INSTALL_PREFIX=/usr               \
+      -DLLVM_ENABLE_FFI=ON                      \
+      -DCMAKE_BUILD_TYPE=Release                \
+      -DLLVM_BUILD_LLVM_DYLIB=ON                \
+      -DLLVM_LINK_LLVM_DYLIB=ON                 \
+      -DLLVM_ENABLE_RTTI=ON                     \
+      -DLLVM_TARGETS_TO_BUILD="host;AMDGPU;BPF" \
+      -DLLVM_BUILD_TESTS=ON                     \
+      -Wno-dev -G Ninja ..
+      
+ninja
